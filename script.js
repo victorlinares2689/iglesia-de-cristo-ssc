@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const id = enlace.getAttribute('data-seccion');
 
-      if (enlace.parentElement.classList.contains('tiene-submenu')) {
-        if (tieneSubmenu) tieneSubmenu.classList.toggle('abierto');
+      // En móvil, "¿Quiénes somos?" solo abre/cierra el submenú
+      if (enlace.parentElement.classList.contains('tiene-submenu') && window.innerWidth <= 768) {
+        tieneSubmenu.classList.toggle('abierto');
+        return;
       }
 
       secciones.forEach(sec => sec.classList.remove('activa'));
