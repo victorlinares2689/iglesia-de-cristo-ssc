@@ -1,102 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const enlaces = document.querySelectorAll('[data-seccion]');
-  const enlacesSubmenu = document.querySelectorAll('[data-subseccion]');
-  const secciones = document.querySelectorAll('.seccion');
-  const subsecciones = document.querySelectorAll('.subseccion');
-  const menu = document.querySelector('.menu');
+
+  // =========================================================
+  // MENÚ HAMBURGUESA (móvil)
+  // Ahora la web es una sola página: los enlaces del menú son
+  // anclas (#reuniones, #ubicacion...) y el navegador hace el
+  // scroll solo. El JavaScript solo abre y cierra el menú.
+  // =========================================================
   const botonHamburguesa = document.querySelector('.boton-hamburguesa');
-  const tieneSubmenu = document.querySelector('.tiene-submenu');
+  const navegacion = document.querySelector('.navegacion');
 
-  // --- Cambiar de sección principal ---
-  enlaces.forEach(enlace => {
-    enlace.addEventListener('click', (e) => {
-      e.preventDefault();
-      const id = enlace.getAttribute('data-seccion');
+  function cerrarMenu() {
+    navegacion.classList.remove('abierto');
+    botonHamburguesa.setAttribute('aria-expanded', 'false');
+    botonHamburguesa.setAttribute('aria-label', 'Abrir menú');
+  }
 
-      // En móvil, "¿Quiénes somos?" solo abre/cierra el submenú
-      if (enlace.parentElement.classList.contains('tiene-submenu') && window.innerWidth <= 768) {
-        tieneSubmenu.classList.toggle('abierto');
-        return;
-      }
-
-      secciones.forEach(sec => sec.classList.remove('activa'));
-      const destino = document.getElementById(id);
-      if (destino) destino.classList.add('activa');
-
-      enlaces.forEach(a => a.classList.remove('activo'));
-      enlace.classList.add('activo');
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      if (window.innerWidth <= 768) {
-        menu.classList.remove('abierto');
-        botonHamburguesa.setAttribute('aria-expanded', false);
-      }
+  if (botonHamburguesa && navegacion) {
+    botonHamburguesa.addEventListener('click', () => {
+      const abierto = navegacion.classList.toggle('abierto');
+      botonHamburguesa.setAttribute('aria-expanded', abierto);
+      botonHamburguesa.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
     });
-  });
 
-  // --- Cambiar de subsección ---
-  enlacesSubmenu.forEach(enlace => {
-    enlace.addEventListener('click', (e) => {
-      e.preventDefault();
-      const id = enlace.getAttribute('data-subseccion');
-
-      subsecciones.forEach(sub => sub.classList.remove('activa'));
-      const destino = document.getElementById(id);
-      if (destino) destino.classList.add('activa');
-
-      secciones.forEach(sec => sec.classList.remove('activa'));
-      document.getElementById('quienes-somos').classList.add('activa');
-
-      if (window.innerWidth <= 768) {
-        menu.classList.remove('abierto');
-        botonHamburguesa.setAttribute('aria-expanded', false);
-        if (tieneSubmenu) tieneSubmenu.classList.remove('abierto');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Al tocar cualquier enlace del menú, se cierra
+    navegacion.querySelectorAll('a').forEach(enlace => {
+      enlace.addEventListener('click', cerrarMenu);
     });
-  });
 
-  // --- Cerrar submenú al hacer clic fuera ---
-  document.addEventListener('click', (e) => {
-    if (tieneSubmenu && !tieneSubmenu.contains(e.target)) {
-      tieneSubmenu.classList.remove('abierto');
+    // Si se agranda la ventana a tamaño escritorio, cerramos el menú móvil
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) cerrarMenu();
+    });
+  }
+
+  // =========================================================
+  // CARRUSEL
+  // =========================================================
+  const carrusel = document.querySelector('.carrusel');
+  const btnPrev = document.querySelector('.carrusel-btn.prev');
+  const btnNext = document.querySelector('.carrusel-btn.next');
+  let slides = Array.from(document.querySelectorAll('.carrusel-slide'));
+  let slideActual = 0;
+  let temporizador = null;
+
+  // Quita las fotos que no existen (por ejemplo, si aún no has
+  // subido foto2.jpg). Si no queda ninguna, oculta el carrusel.
+  function quitarSlide(slide) {
+    slide.remove();
+    slides = slides.filter(s => s !== slide);
+    if (slides.length === 0) {
+      if (carrusel) carrusel.remove();
+      return;
+    }
+    slideActual = 0;
+    mostrarSlide(0);
+    actualizarFlechas();
+  }
+
+  slides.forEach(slide => {
+    const img = slide.querySelector('img');
+    // La imagen pudo fallar antes de que este código se ejecutara
+    if (img.complete && img.naturalWidth === 0) {
+      quitarSlide(slide);
+    } else {
+      img.addEventListener('error', () => quitarSlide(slide));
     }
   });
 
-  // --- Menú hamburguesa ---
-  if (botonHamburguesa && menu) {
-    botonHamburguesa.addEventListener('click', () => {
-      const abierto = menu.classList.toggle('abierto');
-      botonHamburguesa.setAttribute('aria-expanded', abierto);
-    });
-  }
-
-  // --- Carrusel ---
-  const slides = document.querySelectorAll('.carrusel-slide');
-  const btnPrev = document.querySelector('.carrusel-btn.prev');
-  const btnNext = document.querySelector('.carrusel-btn.next');
-  let slideActual = 0;
-
   function mostrarSlide(index) {
     slides.forEach(slide => slide.classList.remove('activo'));
-    slides[index].classList.add('activo');
+    if (slides[index]) slides[index].classList.add('activo');
   }
 
   function siguienteSlide() {
+    if (slides.length < 2) return;
     slideActual = (slideActual + 1) % slides.length;
     mostrarSlide(slideActual);
   }
 
   function anteriorSlide() {
+    if (slides.length < 2) return;
     slideActual = (slideActual - 1 + slides.length) % slides.length;
     mostrarSlide(slideActual);
   }
 
-  if (slides.length > 0) {
-    if (btnNext) btnNext.addEventListener('click', siguienteSlide);
-    if (btnPrev) btnPrev.addEventListener('click', anteriorSlide);
-    setInterval(siguienteSlide, 5000);
+  // Con una sola foto no tienen sentido las flechas
+  function actualizarFlechas() {
+    const mostrar = slides.length > 1;
+    if (btnPrev) btnPrev.hidden = !mostrar;
+    if (btnNext) btnNext.hidden = !mostrar;
+  }
+
+  // Reinicia el cambio automático cuando el usuario pulsa una flecha,
+  // así la foto no cambia justo después de que él la haya elegido
+  function reiniciarTemporizador() {
+    clearInterval(temporizador);
+    temporizador = setInterval(siguienteSlide, 5000);
+  }
+
+  if (carrusel && slides.length > 0) {
+    if (btnNext) btnNext.addEventListener('click', () => { siguienteSlide(); reiniciarTemporizador(); });
+    if (btnPrev) btnPrev.addEventListener('click', () => { anteriorSlide(); reiniciarTemporizador(); });
+    reiniciarTemporizador();
   }
 });

@@ -3,186 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IdC en San Salvador Centro</title>
+  <title>Iglesia de Cristo en San Salvador Centro</title>
   <meta name="description" content="Iglesia de Cristo en San Salvador Centro: horarios, ministerios, ubicación y contacto.">
-  <meta name="theme-color" content="#eaf8ff">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="./favicon.ico?v=3" type="image/x-icon">
-  <link rel="stylesheet" href="estilos.css">
+
+  <!-- Tipografías: Cormorant Garamond (títulos) + Inter (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
   <a class="saltar-contenido" href="#contenido-principal">Saltar al contenido principal</a>
 
-  <div class="cabecera-fija">
-    <header class="barra-superior">
-      <a href="#inicio" class="nombre-sitio" data-seccion="inicio">
-        Iglesia de Cristo en San Salvador Centro
+  <!-- ===== CABECERA ===== -->
+  <header class="cabecera">
+    <div class="cabecera-contenido">
+      <a href="#inicio" class="nombre-sitio">
+        <span class="nombre-cursiva">Iglesia de Cristo</span>
+        <span class="nombre-mayus">San Salvador Centro</span>
       </a>
-      <div class="barra-derecha">
-        <div class="redes-sociales">
-          <a href="https://facebook.com/tu-pagina" target="_blank" aria-label="Facebook">
-            <i class="fa-brands fa-facebook"></i>
-          </a>
-          <a href="https://youtube.com/tu-canal" target="_blank" aria-label="YouTube">
-            <i class="fa-brands fa-youtube"></i>
-          </a>
-        </div>
-        <img src="img/logo-iglesia.png" alt="Logo de la Iglesia de Cristo San Salvador Centro" class="logo-img">
-      </div>
-    </header>
 
-    <nav class="navegacion" aria-label="Navegación principal">
-      <button class="boton-hamburguesa" aria-label="Abrir menú" aria-expanded="false">
-        <i class="fa-solid fa-bars"></i>
+      <button class="boton-hamburguesa" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
 
-      <ul class="menu">
-        <li class="tiene-submenu">
-          <a href="#quienes-somos" data-seccion="quienes-somos">¿Quiénes somos?</a>
-          <ul class="submenu">
-            <li><a href="#mision" data-subseccion="mision">Misión</a></li>
-            <li><a href="#vision" data-subseccion="vision">Visión</a></li>
-            <li><a href="#valores" data-subseccion="valores">Valores</a></li>
-          </ul>
-        </li>
-        <li><a href="#reuniones" data-seccion="reuniones">Días de Reunión</a></li>
-        <li><a href="#ministerios" data-seccion="ministerios">Ministerios</a></li>
-        <li><a href="#ubicacion" data-seccion="ubicacion">Ubicación</a></li>
-      </ul>
-    </nav>
-  </div>
+      <nav class="navegacion" aria-label="Navegación principal">
+        <ul class="menu" id="menu-principal">
+          <li><a href="#quienes-somos">¿Quiénes somos?</a></li>
+          <li><a href="#reuniones">Reuniones</a></li>
+          <li><a href="#ministerios">Ministerios</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+        <div class="redes-sociales">
+          <a href="https://facebook.com/tu-pagina" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="https://youtube.com/tu-canal" target="_blank" rel="noopener" aria-label="YouTube">
+            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
   <main id="contenido-principal">
-    <!-- INICIO CON CARRUSEL -->
-    <section id="inicio" class="seccion activa">
+
+    <!-- ===== PORTADA ===== -->
+    <section id="inicio" class="portada">
+      <div class="logo-circulo">
+        <img src="img/logo-iglesia.png" alt="Logo de la Iglesia de Cristo San Salvador Centro">
+      </div>
+
+      <h1 class="portada-titulo">Iglesia de Cristo<br>San Salvador Centro</h1>
+      <p class="portada-lema">Hablamos donde la biblia habla, callamos donde la biblia calla.</p>
+
+      <!-- Carrusel: se oculta solo si todavía no hay fotos en img/ -->
       <div class="carrusel">
         <div class="carrusel-slide activo">
           <img src="img/foto1.jpg" alt="Congregación reunida">
-          <div class="carrusel-texto">
-            <h2>Bienvenido a la Iglesia de Cristo en San Salvador Centro</h2>
-            <p>Un lugar para encontrarte con Dios y con los hermanos.</p>
-          </div>
         </div>
-
         <div class="carrusel-slide">
           <img src="img/foto2.jpg" alt="Culto de adoración">
-          <div class="carrusel-texto">
-            <h2>Te invitamos a conocernos</h2>
-            <p>Ven y comparte con nosotros en nuestras reuniones.</p>
-          </div>
         </div>
-
         <div class="carrusel-slide">
           <img src="img/foto3.jpg" alt="Ministerio de jóvenes">
-          <div class="carrusel-texto">
-            <h2>Una comunidad para crecer</h2>
-            <p>Ministerios para todas las edades y etapas de la vida.</p>
-          </div>
         </div>
+        <button class="carrusel-btn prev" aria-label="Foto anterior">&#10094;</button>
+        <button class="carrusel-btn next" aria-label="Foto siguiente">&#10095;</button>
+      </div>
 
-        <button class="carrusel-btn prev" aria-label="Anterior">&#10094;</button>
-        <button class="carrusel-btn next" aria-label="Siguiente">&#10095;</button>
+      <div class="portada-botones">
+        <a href="#reuniones" class="boton boton-dorado">Días de reunión</a>
+        <a href="#ubicacion" class="boton boton-borde">Cómo llegar</a>
       </div>
     </section>
 
-    <!-- QUIÉNES SOMOS -->
+    <!-- ===== QUIÉNES SOMOS ===== -->
     <section id="quienes-somos" class="seccion">
-      <h2>¿Quiénes somos?</h2>
-
-      <article id="mision" class="subseccion activa">
-        <h3>Misión</h3>
-        <p>Ser la luz de mundo guiando almas a Cristo a través de la predicación del evangelio</p>
-      </article>
-
-      <article id="vision" class="subseccion">
-        <h3>Visión</h3>
-        <p>Alcanzar la salvación y la vida eterna en la presencia de Dios</p>
-      </article>
-
-      <article id="valores" class="subseccion">
-        <h3>Valores</h3>
-        <p>Santidad, unidad y servicio</p>
-      </article>
+      <div class="contenedor">
+        <h2 class="titulo-seccion">¿Quiénes somos?</h2>
+        <div class="tres-columnas">
+          <article id="mision">
+            <h3>Misión</h3>
+            <p>Ser la luz del mundo guiando almas a Cristo a través de la predicación del evangelio.</p>
+          </article>
+          <article id="vision">
+            <h3>Visión</h3>
+            <p>Alcanzar la salvación y la vida eterna en la presencia de Dios.</p>
+          </article>
+          <article id="valores">
+            <h3>Valores</h3>
+            <p>Santidad, unidad y servicio.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- DÍAS DE REUNIÓN -->
-    <section id="reuniones" class="seccion">
-      <h2>Días de Reunión</h2>
-      <table class="tabla-reuniones">
-        <thead>
-          <tr>
-            <th>Día</th>
-            <th>Reunión</th>
-            <th>Hora</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Martes</td>
-            <td>Día de oración</td>
-            <td>5:30 PM – 6:30 PM</td>
-          </tr>
-          <tr>
-            <td>Jueves</td>
-            <td>Clase bíblica</td>
-            <td>5:30 PM – 6:30 PM</td>
-          </tr>
-          <tr>
-            <td>Sábado</td>
-            <td>Clase de mujeres</td>
-            <td>3:00 PM – 4:00 PM</td>
-          </tr>
-          <tr>
-            <td>Sábado</td>
-            <td>Clase de varones</td>
-            <td>3:00 PM – 4:00 PM</td>
-          </tr>
-          <tr>
-            <td>Domingo</td>
-            <td>Culto de adoración y clase bíblica</td>
-            <td>8:20 AM – 11:00 AM</td>
-          </tr>
-          <tr>
-            <td>Domingo</td>
-            <td>Culto de adoración</td>
-            <td>2:00 PM – 3:00 PM</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- ===== DÍAS DE REUNIÓN ===== -->
+    <section id="reuniones" class="seccion seccion-crema">
+      <div class="contenedor contenedor-estrecho">
+        <h2 class="titulo-seccion">Días de reunión</h2>
+        <div class="tabla-envoltorio">
+          <table class="tabla-reuniones">
+            <thead>
+              <tr>
+                <th>Día</th>
+                <th>Reunión</th>
+                <th>Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Martes</td><td>Día de oración</td><td>5:30 – 6:30 PM</td></tr>
+              <tr><td>Jueves</td><td>Clase bíblica</td><td>5:30 – 6:30 PM</td></tr>
+              <tr><td>Sábado</td><td>Clase de mujeres</td><td>3:00 – 4:00 PM</td></tr>
+              <tr><td>Sábado</td><td>Clase de varones</td><td>3:00 – 4:00 PM</td></tr>
+              <tr><td>Domingo</td><td>Culto de adoración y clase bíblica</td><td>8:20 – 11:00 AM</td></tr>
+              <tr><td>Domingo</td><td>Culto de adoración</td><td>2:00 – 3:00 PM</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
-    <!-- MINISTERIOS -->
+    <!-- ===== MINISTERIOS ===== -->
     <section id="ministerios" class="seccion">
-      <h2>Ministerios</h2>
-      <ul>
-        <li>Ministerio de Ancianos</li>
-        <li>Ministerio de Diáconos</li>
-        <li>Ministerio de Matrimonios</li>
-        <li>Ministerio de Jovenes</li>
-        <li>Ministerio de Mujeres</li>
-      </ul>
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Ministerios</h2>
+        <ul class="ministerios">
+          <li>Ancianos</li>
+          <li>Diáconos</li>
+          <li>Matrimonios</li>
+          <li>Jóvenes</li>
+          <li>Mujeres</li>
+        </ul>
+      </div>
     </section>
 
-    <!-- UBICACIÓN -->
-    <section id="ubicacion" class="seccion">
-      <h2>Ubicación</h2>
-      <p>Nos encontramos en San Salvador Centro. Visítanos:</p>
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d303.286151092018!2d-89.1983914980273!3d13.697172144317186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6330ee3e1ed1b9%3A0xfa80a26efbf1a47b!2sIglesia%20de%20Cristo%20San%20Salvador%20Centro!5e0!3m2!1ses-419!2ses!4v1789941811246!5m2!1ses-419!2ses"
-        width="100%" height="400" style="border:0; border-radius: 8px;"
-        allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
-      </iframe>
-      <p class="enlace-mapa">
-        <a href="https://maps.google.com/?q=Iglesia+de+Cristo+San+Salvador+Centro" target="_blank" rel="noopener">
-          Ven a visitarnos →
-        </a>
-      </p>
+    <!-- ===== UBICACIÓN ===== -->
+    <section id="ubicacion" class="seccion seccion-crema">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Ubicación</h2>
+        <div class="ubicacion">
+          <iframe
+            class="mapa"
+            title="Mapa de la Iglesia de Cristo San Salvador Centro"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d303.286151092018!2d-89.1983914980273!3d13.697172144317186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6330ee3e1ed1b9%3A0xfa80a26efbf1a47b!2sIglesia%20de%20Cristo%20San%20Salvador%20Centro!5e0!3m2!1ses-419!2ses!4v1789941811246!5m2!1ses-419!2ses"
+            allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+          <div class="ubicacion-texto">
+            <p class="ubicacion-titulo">Te esperamos</p>
+            <p>Nos encontramos en San Salvador Centro, El Salvador.</p>
+            <a href="https://maps.google.com/?q=Iglesia+de+Cristo+San+Salvador+Centro" target="_blank" rel="noopener" class="boton boton-dorado">Ven a visitarnos</a>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main>
 
+  <!-- ===== PIE DE PÁGINA ===== -->
   <footer class="pie-pagina">
-    <p>© 2026 Iglesia de Cristo San Salvador Centro</p>
+    <div class="contenedor pie-columnas">
+      <div>
+        <p class="pie-nombre">
+          <span class="nombre-cursiva">Iglesia de Cristo</span><br>
+          <span class="nombre-mayus">San Salvador Centro</span>
+        </p>
+        <p>Hablamos donde la biblia habla, callamos donde la biblia calla.</p>
+      </div>
+      <div>
+        <p class="pie-titulo">Domingos</p>
+        <p>Culto y clase bíblica: 8:20 AM<br>Culto de adoración: 2:00 PM</p>
+      </div>
+      <div>
+        <p class="pie-titulo">Síguenos</p>
+        <p>
+          <a href="https://facebook.com/tu-pagina" target="_blank" rel="noopener">Facebook</a><br>
+          <a href="https://youtube.com/tu-canal" target="_blank" rel="noopener">YouTube</a>
+        </p>
+      </div>
+    </div>
+    <p class="pie-copy">© 2026 Iglesia de Cristo San Salvador Centro</p>
   </footer>
 
   <script src="script.js"></script>
